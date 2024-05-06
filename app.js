@@ -9,10 +9,12 @@ const PORT = 3000;
 app.use(bodyParser.json());
 
 const feedStation = require('./routes/feedStation');
+//const feedStationDetail = require('./routes/feedStationDetail');
 // const hospital = require('./routes/hospital');
 // const recognition = require('./routes/recognition');
 
 app.use('/api/feedStation', feedStation);
+//app.use('/api/feedStationDetail', feedStationDetail);
 // app.use('/api/hospital', hospital);
 // app.use('/api/recognition', recognition);
 
