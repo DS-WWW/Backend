@@ -8,6 +8,14 @@ const PORT = 3000;
 // JSON 파싱을 위한 미들웨어 설정
 app.use(bodyParser.json());
 
+const feedStation = require('./routes/feedStation');
+// const hospital = require('./routes/hospital');
+// const recognition = require('./routes/recognition');
+
+app.use('/api/feedStation', feedStation);
+// app.use('/api/hospital', hospital);
+// app.use('/api/recognition', recognition);
+
 app.get('/', (req,res)=> {
     res.send('hello express!');
 })
