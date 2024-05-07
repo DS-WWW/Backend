@@ -8,6 +8,9 @@ const PORT = 3000;
 // JSON 파싱을 위한 미들웨어 설정
 app.use(bodyParser.json());
 
+// 몽고디비 연결
+// const mongoose = require('mongoose');
+
 const feedStation = require('./routes/feedStation');
 //const feedStationDetail = require('./routes/feedStationDetail');
 // const hospital = require('./routes/hospital');
