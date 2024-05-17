@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const { Schema } = mongoose;
 
 const stationSchema = new mongoose.Schema({
     name: {     // 이름
@@ -16,8 +15,11 @@ const stationSchema = new mongoose.Schema({
     },
     water: {      // 물
         type: Number
+    },
+    time: {
+        type: Date  // 측정 시간
     }
-}, { timestamps: true });   // 측정 시간
+})
 
 const Station = mongoose.model('Station', stationSchema)
 
