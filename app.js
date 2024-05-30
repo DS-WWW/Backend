@@ -4,7 +4,7 @@ const fs = require('fs');
 const config = require('./config/key');
 
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
 // JSON 파싱을 위한 미들웨어 설정
 app.use(bodyParser.json());
@@ -19,115 +19,12 @@ mongoose.connect(config.mongoURI, {
 const feedStation = require('./routes/feedStation');
 //const feedStationDetail = require('./routes/feedStationDetail');
 const hospital = require('./routes/hospital');
-// const recognition = require('./routes/recognition');
+const recognition = require('./routes/recognition');
 
 app.use('/api/feedStation', feedStation);
 //app.use('/api/feedStationDetail', feedStationDetail);
 app.use('/api/hospital', hospital);
-// app.use('/api/recognition', recognition);
-
-app.get('/', (req,res)=> {
-    res.send('hello express!');
-})
-
-// 메모 목록 조회
-app.get('/memos', (req, res) => {
-    fs.readFile('memos.json', 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-
-        res.json(JSON.parse(data));
-    });
-});
-
-// 메모 생성
-app.post('/memos', (req, res) => {
-    const newMemo = req.body;
-    fs.readFile('memos.json', 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-
-        const memos = JSON.parse(data);
-        memos.push(newMemo);
-
-        fs.writeFile('memos.json', JSON.stringify(memos), (err) => {
-            if (err) {
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-
-            res.status(201).send('Memo created successfully');
-        });
-    });
-});
-
-// 메모 업데이트
-app.put('/memos/:id', (req, res) => {
-    const memoId = req.params.id;
-    const updatedMemo = req.body;
-
-    fs.readFile('memos.json', 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-
-        let memos = JSON.parse(data);
-        const memoIndex = memos.findIndex(memo => memo.id === memoId);
-
-        if (memoIndex === -1) {
-            res.status(404).send('Memo not found');
-            return;
-        }
-
-        memos[memoIndex] = updatedMemo;
-
-        fs.writeFile('memos.json', JSON.stringify(memos), (err) => {
-            if (err) {
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-
-            res.status(200).send('Memo updated successfully');
-        });
-    });
-});
-
-// 메모 삭제
-app.delete('/memos/:id', (req, res) => {
-    const memoId = req.params.id;
-
-    fs.readFile('memos.json', 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-
-        let memos = JSON.parse(data);
-        const memoIndex = memos.findIndex(memo => memo.id === memoId);
-
-        if (memoIndex === -1) {
-            res.status(404).send('Memo not found');
-            return;
-        }
-
-        memos.splice(memoIndex, 1);
-
-        fs.writeFile('memos.json', JSON.stringify(memos), (err) => {
-            if (err) {
-                res.status(500).send('Internal Server Error');
-                return;
-            }
-
-            res.status(200).send('Memo deleted successfully');
-        });
-    });
-});
-
+app.use('/api/recognition', recognition);
 
 
 app.listen(PORT, () => {

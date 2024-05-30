@@ -2,16 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recognitionSchema = mongoose.Schema({
-    name: {     // 이름
+    title: {     // 이름
         type: String
     },
-    imageUrl: {  // 이미지
+    img: {  // 이미지
         type: String
     },
     category: {      // 카테고리
         type: String
+    },
+    date: {
+        type: Date
     }
-}, { timestamps: true });
+});
 
 const Recognition = mongoose.model('Recognition', recognitionSchema);
 
