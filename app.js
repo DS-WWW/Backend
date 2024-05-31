@@ -1,5 +1,6 @@
 const express = require('express'); //express 모듈을 가져옴
 const bodyParser = require('body-parser'); //새 앱을 만듦
+const cors = require('cors'); // cors 모듈 가져옴
 const fs = require('fs');
 const config = require('./config/key');
 
@@ -8,6 +9,9 @@ const PORT = 8080;
 
 // JSON 파싱을 위한 미들웨어 설정
 app.use(bodyParser.json());
+
+// CORS 미들웨어 설정
+app.use(cors());
 
 // 몽고디비 연결
 const mongoose = require('mongoose');
