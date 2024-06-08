@@ -9,15 +9,6 @@ const stationSchema = new mongoose.Schema({
     },
     lng: {      // 경도
         type: Number
-    },
-    feed: {      // 먹이
-        type: Number
-    },
-    water: {      // 물
-        type: Number
-    },
-    time: {
-        type: Date  // 측정 시간
     }
 })
 

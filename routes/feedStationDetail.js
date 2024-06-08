@@ -1,23 +1,38 @@
 const express = require('express');
 const bodyParser = require('body-parser'); 
 const router = express.Router();
-const { Station } = require('../models/Station'); // 모델 선언
+const { IoT, IoT2 } = require('../models/IoT'); 
 
 router.use(bodyParser.json());
 
-// 급식소 상세
-router.get('/:id', (req, res) => {  
-    Station.findById(req.params.id)
-    .then(stations => {
-        if (stations) {
-            res.status(200).json({ success: true, stations });
+
+// 각 급식소의 데이터 가져오기
+router.get("/:name", async (req, res) => {
+    try {
+        const stationName = decodeURIComponent(req.params.name); // URL 인코딩된 문자열을 디코딩
+        console.log(`Fetching IoT data for station: ${stationName}`);
+
+        // IoT 데이터 가져오기
+        let iotData;
+        if (stationName === "덕성여자대학교 정문") {
+            iotData = await IoT.find({
+                stationName: new RegExp(`^${stationName}$`, 'i')
+            }).sort({ time: -1 }).exec();
+        } else if (stationName === "덕성여자대학교 도서관") {
+            iotData = await IoT2.find({
+                stationName: new RegExp(`^${stationName}$`, 'i')
+            }).sort({ time: -1 }).exec();
         } else {
-            res.status(404).json({ success: false, message: 'Feed station not found' });
+            console.log('Station not found');
+            return res.status(404).json({ success: false, message: '해당 스테이션을 찾을 수 없습니다.' });
         }
-    })
-    .catch(err => {
+
+        console.log(`Found ${iotData.length} records`);
+        res.status(200).json({ success: true, iotData });
+    } catch (err) {
+        console.error('Error fetching IoT data:', err);
         res.status(500).json({ success: false, error: err.message });
-    });
+    }
 });
 
 module.exports = router;
