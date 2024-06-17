@@ -13,13 +13,13 @@ const iotSchema = new mongoose.Schema({
     count: {         // 카운트
         type: Number
     },
-    stationName: {
+    station_name: {
         type: String
     }
 });
 
 
-const IoT = mongoose.model('IoT', iotSchema, 'IoT');
+const IoT = mongoose.model('IoT', iotSchema, 'test1');
 const IoT2 = mongoose.model('IoT2', iotSchema, 'iot2'); 
 
 module.exports = { IoT, IoT2 };

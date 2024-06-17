@@ -16,11 +16,11 @@ router.get("/:name", async (req, res) => {
         let iotData;
         if (stationName === "덕성여자대학교 정문") {
             iotData = await IoT.find({
-                stationName: new RegExp(`^${stationName}$`, 'i')
+                station_name: new RegExp(`^${stationName}$`, 'i')
             }).sort({ time: -1 }).exec();
         } else if (stationName === "덕성여자대학교 도서관") {
             iotData = await IoT2.find({
-                stationName: new RegExp(`^${stationName}$`, 'i')
+                station_name: new RegExp(`^${stationName}$`, 'i')
             }).sort({ time: -1 }).exec();
         } else {
             console.log('Station not found');
