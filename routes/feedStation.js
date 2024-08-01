@@ -23,14 +23,14 @@ router.get("/", async (req, res) => {
 
             if (station.name === "덕성여자대학교 정문") {
                 latestIoTData = await IoT.find({
-                    stationName: new RegExp(`^${station.name}$`, 'i') // 대소문자 무시 정규 표현식
+                    station_name: new RegExp(`^${station.name}$`, 'i') // 대소문자 무시 정규 표현식
                 })
                 .sort({ time: -1, count: -1 }) // time을 기준으로 내림차순 정렬 후 count를 기준으로 내림차순 정렬
                 .limit(1)
                 .exec();
             } else if (station.name === "덕성여자대학교 도서관") {
                 latestIoTData = await IoT2.find({
-                    stationName: new RegExp(`^${station.name}$`, 'i') // 대소문자 무시 정규 표현식
+                    station_name: new RegExp(`^${station.name}$`, 'i') // 대소문자 무시 정규 표현식
                 })
                 .sort({ time: -1, count: -1 }) // time을 기준으로 내림차순 정렬 후 count를 기준으로 내림차순 정렬
                 .limit(1)
@@ -69,6 +69,7 @@ router.get("/", async (req, res) => {
         res.status(500).json({ success: false, error: err.message });
     }
 });
+
 
 // 맵 마커용 데이터 배열
 router.get("/dsMapMarker", (req, res) => {

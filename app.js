@@ -3,6 +3,9 @@ const bodyParser = require('body-parser'); //새 앱을 만듦
 const cors = require('cors'); // cors 모듈 가져옴
 const fs = require('fs');
 const config = require('./config/key');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 const PORT = 8080;
@@ -24,11 +27,14 @@ const feedStation = require('./routes/feedStation');
 const feedStationDetail = require('./routes/feedStationDetail');
 const hospital = require('./routes/hospital');
 const recognition = require('./routes/recognition');
+const s3Images = require('./routes/s3Images'); 
+
 
 app.use('/api/feedStation', feedStation);
 app.use('/api/feedStationDetail', feedStationDetail);
 app.use('/api/hospital', hospital);
 app.use('/api/recognition', recognition);
+app.use('/api/s3Images', s3Images); 
 
 
 app.listen(PORT, () => {
