@@ -132,3 +132,4 @@ dist
 dev.js
 www-back.pem
 .env
+.ppk
