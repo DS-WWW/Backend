@@ -13,6 +13,9 @@ const recognitionSchema = mongoose.Schema({
     },
     date: {
         type: Date
+    },
+    animal: {
+        type: String
     }
 });
 
