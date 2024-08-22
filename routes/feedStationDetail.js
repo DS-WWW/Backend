@@ -9,18 +9,18 @@ router.use(bodyParser.json());
 // 각 급식소의 데이터 가져오기
 router.get("/:name", async (req, res) => {
     try {
-        const stationName = decodeURIComponent(req.params.name); // URL 인코딩된 문자열을 디코딩
-        console.log(`Fetching IoT data for station: ${stationName}`);
+        const station_name = decodeURIComponent(req.params.name); // URL 인코딩된 문자열을 디코딩
+        console.log(`Fetching IoT data for station: ${station_name}`);
 
         // IoT 데이터 가져오기
         let iotData;
         if (stationName === "덕성여자대학교 정문") {
             iotData = await IoT.find({
-                station_name: new RegExp(`^${stationName}$`, 'i')
+                stationName: new RegExp(`^${stationName}$`, 'i')
             }).sort({ time: -1 }).exec();
         } else if (stationName === "덕성여자대학교 도서관") {
             iotData = await IoT2.find({
-                station_name: new RegExp(`^${stationName}$`, 'i')
+                stationName: new RegExp(`^${stationName}$`, 'i')
             }).sort({ time: -1 }).exec();
         } else {
             console.log('Station not found');

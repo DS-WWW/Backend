@@ -130,3 +130,6 @@ dist
 .pnp.*
 
 dev.js
+www-back.pem
+.env
+.ppk

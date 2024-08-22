@@ -70,6 +70,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+
 // 맵 마커용 데이터 배열
 router.get("/dsMapMarker", (req, res) => {
     Station.find({}, { _id: 1, name: 1, lat: 1, lng: 1 }) // name, lat, lng 필드만 선택
