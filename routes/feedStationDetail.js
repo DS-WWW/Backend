@@ -14,13 +14,13 @@ router.get("/:name", async (req, res) => {
 
         // IoT 데이터 가져오기
         let iotData;
-        if (stationName === "덕성여자대학교 정문") {
+        if (station_name === "덕성여자대학교 정문") {
             iotData = await IoT.find({
-                stationName: new RegExp(`^${stationName}$`, 'i')
+                station_name: new RegExp(`^${station_name}$`, 'i')
             }).sort({ time: -1 }).exec();
-        } else if (stationName === "덕성여자대학교 도서관") {
+        } else if (station_name === "덕성여자대학교 도서관") {
             iotData = await IoT2.find({
-                stationName: new RegExp(`^${stationName}$`, 'i')
+                station_name: new RegExp(`^${station_name}$`, 'i')
             }).sort({ time: -1 }).exec();
         } else {
             console.log('Station not found');

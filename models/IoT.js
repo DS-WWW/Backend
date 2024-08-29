@@ -19,7 +19,7 @@ const iotSchema = new mongoose.Schema({
 });
 
 
-const IoT = mongoose.model('IoT', iotSchema, 'IoT');
+const IoT = mongoose.model('IoT', iotSchema, 'test1');
 const IoT2 = mongoose.model('IoT2', iotSchema, 'iot2'); 
 
 module.exports = { IoT, IoT2 };
